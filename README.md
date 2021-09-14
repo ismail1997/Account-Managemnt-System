@@ -6,6 +6,9 @@ This project is java console application, it is about banking account managing, 
 
 it is writing with java and the data is saved withing files 
 
+Admin Home Page
+![](images/adminMenu.PNG)
+
 ---
 ### Prequisites
 Java 8 or higher
