@@ -20,8 +20,8 @@ import sessionManagement.SessionManagementTools;
 public class UserTools {
 	
 	public static final String filePath =Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\persons\\persons.txt";
-	public static final String userHistoryFilePath="\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\userHistory";
-	public static final String idOfUsers = "\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\idtool\\ids.txt";
+	public static final String userHistoryFilePath=Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\userHistory";
+	public static final String idOfUsers = Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\idtool\\ids.txt";
 	
 	public static void writeUserToFileAsString(User user) {
 		try {
