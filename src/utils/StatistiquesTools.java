@@ -48,25 +48,40 @@ public class StatistiquesTools {
 	public static double soldeOffAllAccounts() {
 		return AccountTools.getAccounts().stream().mapToDouble(o->o.getSolde()).sum();
 	}
+	
+	public static double soldeOfActiveAccounts() {
+		return AccountTools.getAccounts().stream().filter(a->a.isActive()).mapToDouble(w->w.getSolde()).sum();
+	}
+	public static double soldeOfNoneActiveAccounts() 
+	{
+		return AccountTools.getAccounts().stream().filter(a->!a.isActive()).mapToDouble(w->w.getSolde()).sum();
+	}
+	public static double soldeOfSingleAccounts() {
+		return AccountTools.getAccounts().stream().filter(a->a.getTypeOfAccount().equals("Single Account"))
+				           .mapToDouble(x->x.getSolde())
+				           .sum();
+	}
+	
+	public static double soldeOfSavingAccounts() {
+		return AccountTools.getAccounts().stream()
+				           .filter(a->a.getTypeOfAccount().equals("Saving Account"))
+				           .mapToDouble(x->x.getSolde())
+				           .sum();
+	}
+	
+	public static double soldeOfCommonAccounts() {
+		return AccountTools.getAccounts().stream()
+				           .filter(a->a.getTypeOfAccount().equals("Common Account"))
+				           .mapToDouble(x->x.getSolde())
+				           .sum();
+	}
+	
 	public static void main(String[] args) throws IOException {
-//		System.out.println(nombreOfSingleAccount());
-//		System.out.println(nombreOfSavingAccount());
-//		System.out.println(nombreOfCommonAccount());
-		System.out.println(soldeOffAllAccounts());
-		//AccountTools.getAccounts().forEach(System.out::println);
+		System.out.println(soldeOfCommonAccounts()+soldeOfSavingAccounts()+soldeOfSingleAccounts());
 	}
 	
 	/*
-	 * 
-	 *System.out.format(formatOfString,"Nombre of Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Active Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of None Active Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Single Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Saving Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Common Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Active Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of None Active Accounts"," accounts");
+
 			System.out.format(formatOfString,"Total Sold of Simple Accounts"," accounts");
 			System.out.format(formatOfString,"Total Sold of Common Accounts"," accounts");
 	 * */
