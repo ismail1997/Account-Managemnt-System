@@ -7,6 +7,8 @@ public class CryptTools {
 	
 	
 	public static char getTheEquivalentChar(char c) {
+		if(c=='\'') return 'à';
+		if(c=='à') return '\'';
 		String alphabetOne  ="abcdefghijklmnopqrstuvwxyz";
 		String alphabetTwo  ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String alphaNumeric ="&;,:§!%*$£µ><?¨^~#{}[]=+°@";

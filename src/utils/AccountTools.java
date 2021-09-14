@@ -338,9 +338,21 @@ public class AccountTools {
 		//getAccountOfUser(2).forEach(System.out::println);
 		//writeHistoryForAccount("Has been credited with amount of 2000 DH", getOneAccountById(10));
 		//getAccounts().forEach(System.out::println);
-		activateAccount(getOneAccountById(4));
+		//getAccounts().forEach(System.out::println);;
+		
+		ArrayList<Integer> usersID= new ArrayList<Integer>();
+		
+		ArrayList<User> users = UserTools.getUsers();
+		for(int i = 0 ; i<users.size();i++) {
+			usersID.add(users.get(i).getId());
+		}
+		System.out.println(usersID);
+		
+		List<Account> a =getAccounts().stream().filter(x->!usersID.contains(x.getUserID())).collect(Collectors.toList());
 		//getHistoryOfAccount(getOneAccountById(10)).forEach(x->System.out.println(x));
 		//getHistoryForAllAccounts(getAccountsByUserID(1)).forEach(System.out::println);;
+		a.forEach(System.out::println);
+
 	}
 }
 

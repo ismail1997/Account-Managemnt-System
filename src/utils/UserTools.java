@@ -171,6 +171,21 @@ public class UserTools {
 		return history;
 	}
 	
+	public static String deleteUser(User user,ArrayList<User> users) throws IOException {
+		User c =users.stream().filter(a->a.getId()==user.getId()).findAny().orElseThrow(null);
+		if(c==null) return "Failed, Couldn't find The User";
+		//clean the file that contains 
+		Tools.cleanDataFromFile(filePath);
+		//remove the user from the files 
+		users.remove(c);
+		//update the users file
+		for(int i = 0 ; i<users.size();i++) {
+			writeUserToFileAsString(users.get(i));
+		}
+		//System.out.println("done updating user");
+		return "deleted successfully";
+	}
+	
 	public static void main(String[] args) throws Exception {
 		
 //		User u = new User(1, "202108311848-0001", "ismail","bouaddi", "+212611298559", "bouaddi1997@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "admin");
@@ -195,35 +210,20 @@ public class UserTools {
 //		Tools.writeObjectAsStringToFile(u7, file);
 //		Tools.writeObjectAsStringToFile(u8, file);
 //		Tools.writeObjectAsStringToFile(u9, file);
-//		
-		//getUsersFromFile().forEach(System.out::println);
-		
-		
-		//System.out.println(getUserByEmail("bouaddi1997@gmail.com"));
-		
-		//getUsers().forEach(user->createHistoriqueForEveryUser(user));
-		
-		//System.out.println(getUserHistoryNameFile(getOneUser(15)));
-//		String history ="";
-//		User user = getOneUser(1);
-//		history ="User :"+user.getFirstName()+" "+user.getLastName()+" has withdrawed this amount of money "+new Date()+"";
-//		writeHistoryForUser(history,user);
-//		User user = getOneUser(1);
+//
+//		User user = getOneUser(14);
 //		System.out.println(user);
-//		user.setPassword("2021");
-//		user.setAddress("Ait Oumanaer El Maader El Kabir Tiznit");
 //		
-//		
-//		updateUser(getUsers(), user);
-//		//getHistoryOfUser(getOneUser(1)).forEach(x->System.out.println(x));
-//		System.out.println("---------");
-//		System.out.println(getOneUser(1));
-		//getUsers().forEach(System.out::println);
-		User user = SessionManagementTools.getSession().getSessionUser();
-		System.out.println(user);
-		user.setAddress("Hitman Tiznit 2024");
-		updateUser(getUsers(), user);
-		System.out.println(getOneUser(user.getId()));
+//		String deleted =deleteUser(user, getUsers());
+//		System.out.println(deleted);
+//		getUsers().forEach(System.out::println);s
+		
+		File file = new File(filePath);
+		if(file.exists()) {
+			System.out.println("exist");
+		}else {
+			System.out.println("donsn't exist");
+		}
 	}
 	
 	

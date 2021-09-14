@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import entities.Account;
 import entities.User;
@@ -36,7 +39,7 @@ public class AdminMenus {
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format(leftFormatingString,7,"My Account History");
 			System.out.format("  |                                                                                                                                                                                       |%n");
-			System.out.format(leftFormatingString,8,"System History");
+			System.out.format(leftFormatingString,8,"Reclamations");
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format(leftFormatingString,0,"Quit");
 			System.out.format("  |                                                                                                                                                                                       |%n");
@@ -192,12 +195,81 @@ public class AdminMenus {
 			account.setAccountCode(AccountTools.generateAccountCode());
 			account.setTypeOfAccount("Single Account");
 			account.setId(AccountTools.getMaxID()+1);
-			
+			AccountTools.writeAccountToFileAsString(account);
 			AccountTools.createHistoriqueForEveryAccount(account);
 		}
 		return i;
 	}
-	
+	public static int deleteUser() throws Exception {
+		Scanner scanner = new Scanner ( System.in);
+		boolean doesntSelectValidUser = false;
+		boolean errorRemoving = false;
+		int attempt = 0;
+		int i = -1 ;
+		int choice=-2;
+		String leftFormatingString="  |                    User [ id= %-4d, name= %-30s ]                                                                                                            |%n"; 
+		ArrayList<Integer> idOfUsers = new ArrayList<Integer>();
+		do {
+			System.out.println(Menus.header);
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  +                               Please select User id that you want to delete                                                                                                           +%n");
+			
+			if(doesntSelectValidUser) {
+				System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+				System.out.format("  |                       !!  you didn't select a valid user, try again                                                                                                                   |%n");
+				attempt++;
+			}else if(errorRemoving) {
+				System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+				System.out.format("  |               Error Deleting Try again                                                                                                                                              |%n");
+				System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+				attempt++;
+			}
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |              Users Profiles                                                                                                                                                           |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			List<User> usersList=UserTools.getUsers();
+			for(int j =0;j<usersList.size();j++) {
+				
+				if(!usersList.get(j).getUserType().equals("admin")) {
+					System.out.format(leftFormatingString,usersList.get(j).getId(),usersList.get(j).getFirstName()+" "+usersList.get(j).getLastName());
+					idOfUsers.add(usersList.get(j).getId());
+					
+				}
+			}
+			System.out.print("  |    Your Choice :"); int u = scanner.nextInt();
+			
+			if(attempt >=3) {
+				i=0;
+			}else {
+				if(!idOfUsers.contains(u)) {
+					i=-2;
+					doesntSelectValidUser = true;
+				}else {
+					doesntSelectValidUser = false;
+					System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+					System.out.format("  |              You have selected the User "+UserTools.getOneUser(u).getEmail()+"                                                                                                                          |%n");
+					System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+					System.out.print("  |  Type the 1 to confirm, 0 to return :"); choice = scanner.nextInt();
+					if(choice == 1) {
+						i=1;
+					}else {
+						i=0;
+					}
+				}
+			}
+			
+			
+			
+			Menus.clrscr();
+			if(i==1) {
+				UserTools.writeHistoryForUser("Deleted user"+UserTools.getOneUser(u).getEmail(),SessionManagementTools.getSession().getSessionUser());
+				UserTools.deleteUser(UserTools.getOneUser(u), UserTools.getUsers());
+				deletedUserSuccessfully() ;
+			}
+		}while(i!=1 && i!=0);
+		
+		return i;
+	}
 	public static int AdminProfile(User user) {
 		Scanner scanner = new Scanner(System.in) ;
 		String leftFormatingString="  |                          %-20s :\t %-50s                                                                               |%n"; 
@@ -271,12 +343,60 @@ public class AdminMenus {
 		System.out.format("  |                                       |       Sorry , It seems that one or two field are empty               |                                                                        |%n");
 		System.out.format("  |                                       +----------------------------------------------------------------------+                                                                        |%n");
 	}
+	public static void deletedUserSuccessfully() throws InterruptedException {
+		Menus.clrscr();
+		System.out.println(Menus.header);
+		System.out.println("  |                                                                                                                                                                                       |");
+		System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  |                                       +----------------------------------------------------------------------+                                                                        |%n");
+		System.out.format("  |                                       |        Deleting User  has been executed successfully                 |                                                                        |%n");
+		System.out.format("  |                                       +----------------------------------------------------------------------+                                                                        |%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+		TimeUnit.MILLISECONDS.sleep(2500);
+		Menus.clrscr();
+	}
 	
+	public static int statistiquesMenu() {
+		Scanner scanner = new Scanner(System.in);
+		int i = -1 ; 
+		String formatOfString = "  | %-35s : %-20s |%n";
+		while(i!=0) {
+			System.out.println(Menus.header);
+			System.out.println("  |                                                                                                                                                                                       |");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |                                       |                           Statistiques                               |                                                                        |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |              User Details                                                                                                                                            |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format(formatOfString,"Nombre of Users"," users");
+			System.out.format(formatOfString,"Nombre of Admins"," users");
+			System.out.format(formatOfString,"Nombre of Simple Users"," users");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |              Account Details                                                                                                                                            |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format(formatOfString,"Nombre of Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of Active Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of None Active Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of Simple Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of Saving Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of Common Accounts"," accounts");
+			System.out.format(formatOfString,"Total Sold of Accounts"," accounts");
+			System.out.format(formatOfString,"Total Sold of Active Accounts"," accounts");
+			System.out.format(formatOfString,"Total Sold of None Active Accounts"," accounts");
+			System.out.format(formatOfString,"Total Sold of Simple Accounts"," accounts");
+			System.out.format(formatOfString,"Total Sold of Common Accounts"," accounts");
+			
+			i = scanner.nextInt();
+		}
+		return 2;
+	}
 	
 	public static void main(String[] args) throws Exception {
-		System.out.println(AdminProfile(UserTools.getOneUser(1)));
-		//User user = new User(45, null, null, null, null, null, null, null, null, null);
-		//Tools.writeObjectAsStringToFile(user,"src/textfiles/persons.txt");
+		System.out.println(statistiquesMenu());
 	}
 	
 }

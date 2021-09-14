@@ -508,7 +508,14 @@ public class Menus {
 			System.out.format("  |                                                               User History                                                                                                            |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
 			System.out.format("  |                                                                                                                                                                                       |%n");
-			history.forEach(hist->System.out.format(leftFormatingString,hist));
+			if(history.size()<=25) {
+				history.forEach(hist->System.out.format(leftFormatingString,hist));
+			}else {
+				for (int d = history.size()-1 ; d>(history.size()-25) ; d--) {
+					System.out.format(leftFormatingString,history.get(d));
+				}
+			}
+			
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
 			System.out.format("  |       Tape 0 to go back :");i=scanner.nextInt();

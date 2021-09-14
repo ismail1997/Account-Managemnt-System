@@ -17,6 +17,7 @@ import sessionManagement.SessionManagementTools;
 import utils.AccountTools;
 import utils.AdminAccountMenus;
 import utils.AdminMenus;
+import utils.AdminReclamationMenu;
 import utils.Menus;
 import utils.Tools;
 import utils.UserMenus;
@@ -35,21 +36,6 @@ public class Application {
 			+ "  |        |______|\\____)____)___/ \\____|_| |_|\\___)  |_||_||_|\\_||_|_| |_|\\_||_|\\_|| |\\____)_|_|_|\\____)_| |_|\\___)  (______/ \\__  (___/ \\___)____)_|_|_|                                |\r\n"
 			+ "  |                                                                             (_____|                                       (____/                                                      |";
 	public static void main(String[] args) throws Exception {
- 
-//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//		double width = screenSize.getWidth();
-//		double height = screenSize.getHeight();
-//		
-//		System.out.println(width +"   "+height);
-//		
-//		for(int i = 0 ; i<(int)( height/2) ; i++) {
-//			System.out.print("-");
-//		}
-//		
-		
-	
-		//int i =AdminMenus.AdminProfile(UserTools.getOneUser(1));
-		
 		boolean gameOver = false;
 		while ( !gameOver) {
 			int c = Menus.HomeMenu();
@@ -78,7 +64,7 @@ public class Application {
 								}else if(a==2) {
 										
 								}else if(a==3) {
-									//delete user
+									AdminMenus.deleteUser();
 								}else if(a==4) {
 									//user details
 								}else if(a==5) {
@@ -95,7 +81,8 @@ public class Application {
 								int a = AdminAccountMenus.ListOfAccount();
 								switch(a) {
 									case 0 :{listOfAccountCheck=true;break;}
-									case 1 :{break;}
+									case 1 :{AdminAccountMenus.activateAccountMenu();break;}
+									case 2 :{AdminAccountMenus.desactivateAccountMenu();break;}
 									default : break;
 								}
 							}
@@ -136,7 +123,21 @@ public class Application {
 						}else if(r==7) {
 							Menus.myAccountHistory(SessionManagementTools.getSession().getSessionUser().getId());
 						}else if(r==8) {
-							
+							boolean reclamationGameOver = false;
+							while(!reclamationGameOver) {
+								int rec=AdminReclamationMenu.listOfReclamationMenu();
+								switch(rec) {
+								case 1 : {
+									AdminReclamationMenu.answerReclamation();
+									break;
+								}
+								case 0 : {
+									reclamationGameOver = true;
+									break;
+								}
+								default : {reclamationGameOver= true;break;}
+								}
+							}
 						}
 						
 					}
@@ -195,6 +196,15 @@ public class Application {
 								Menus.myAccountHistory(SessionManagementTools.getSession().getSessionUser().getId());
 								break;
 							}
+							case 7 : {
+								UserMenus.writeReclamationMenu(SessionManagementTools.getSession().getSessionUser());
+								break;
+							}
+							case 8 :{
+								UserMenus.listOfUserReclamationMenu(SessionManagementTools.getSession().getSessionUser());
+								
+								break;
+							}
 								
 							default  :{break;}
 						}
@@ -202,7 +212,7 @@ public class Application {
 				}
 				
 			}else if(c==2) {
-				int sing = Menus.singUpUser();
+				 Menus.singUpUser();
 			}else if(c==3) {
 				Menus.aboutUsMenu();
 			}else {
@@ -210,16 +220,10 @@ public class Application {
 			}
 		}
 		
-		
-//		System.out.println(header);
-//		AdminMenus.ListOfUsers();
+
 	}
 	
-	public static User getPersonFromString(String string) 
-	{
-		
-		return null;
-	}
+	
 
 }
 

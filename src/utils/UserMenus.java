@@ -1,11 +1,15 @@
 package utils;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import entities.Account;
+import entities.Reclamation;
 import entities.User;
 import sessionManagement.SessionManagement;
 import sessionManagement.SessionManagementTools;
@@ -39,13 +43,15 @@ public class UserMenus {
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format(leftFormatingString,7,"Reclam To Admin");
 			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,8,"My Reclamations");			
+			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format(leftFormatingString,0,"Quit");
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format("  |                                                                                                                                                                                       |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
 		    System.out.print("  |          Your choice : ");alpha = scanner.nextInt();
 		    Menus.clrscr();
-		}while(alpha != 0 && alpha != 1 && alpha != 2 && alpha != 3 && alpha != 4 && alpha != 5 && alpha != 6 );
+		}while(alpha != 0 && alpha != 1 && alpha != 2 && alpha != 8 && alpha != 3 && alpha != 4 && alpha != 5 && alpha != 6 && alpha != 7);
 		return alpha;
 	}
 	
@@ -228,13 +234,110 @@ public class UserMenus {
 		//System.out.println(user);
 		return r;
 	}
+	public static int writeReclamationMenu(User user) throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		int i = -1;
+		ArrayList<Reclamation> reclamations = ReclamationTools.getReclamations();
+		String reclamation ="";
+		boolean lenghtExedded=false;
+		int attempts = 0;
+		do {
+			System.out.println(Menus.header);
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  |                                      Write your Reclamation                                                                                                                           |%n");
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			if(lenghtExedded) {
+				System.out.format("  | Please keep it to less than 80 characters                                                                                                                                             |%n");
+				System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			}
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  |    write here :");reclamation=scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |       1: Send Reclamation     | 0: Quit                                                                                                                                               |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  Your choice :"); i = scanner.nextInt();
+			Menus.clrscr();
+			
+			if(reclamation.length()>80) {
+				lenghtExedded=true;
+				attempts ++;
+				i=-1;
+			}
+			if(attempts>=3) i = 0;
+		}while(i!= 0 && i!=1 );
+		
+		if(i==1) {
+			Reclamation rec = new Reclamation(ReclamationTools.getMaxID()+1, reclamation, LocalDate.now()+"", false, user.getId(),"");
+			UserTools.writeHistoryForUser("Write A Reclamation to Admins", user);
+			ReclamationTools.writeReclamationToFileAsString(rec);
+			reclamationSendSuccessfully();
+		}
+		
+		return i;
+	}
 	
+	public static void reclamationSendSuccessfully() throws InterruptedException {
+		Menus.clrscr();
+		System.out.println(Menus.header);
+		System.out.println("  |                                                                                                                                                                                       |");
+		System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  |                                       +----------------------------------------------------------------------+                                                                        |%n");
+		System.out.format("  |                                       |        Sending Reclamation to Admins has been executed successfully  |                                                                        |%n");
+		System.out.format("  |                                       +----------------------------------------------------------------------+                                                                        |%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +                                                                                                                                                                                       +%n");
+		System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+		TimeUnit.MILLISECONDS.sleep(2500);
+		Menus.clrscr();
+	}
+	public static int listOfUserReclamationMenu(User user) {
+		Scanner scanner = new Scanner(System.in);
+		int i = -1;
+		List<Reclamation> reclamations = ReclamationTools.getReclamationByUser(user);
+		
+		do {
+			String leftAlignementFormat="  | %-4d | %-80s | %-92s|%n";
+			System.out.println(Menus.header);
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |                                      List Of My Reclamations                                                                                                                          |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  | ID   | Reclamation Message                                                              | Answer                                                                                      |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+				
+				for(Reclamation reclamation : reclamations) 
+				{
+					
+						String answer ="";
+						
+						if(reclamation.isAnswered()) {
+							answer ="[answered]:"+reclamation.getAnswer();
+						}else {
+							answer ="Not Answered";
+						}
+						
+						
+						System.out.format(leftAlignementFormat, reclamation.getId(),reclamation.getMessage(),answer);
+					}
+					
+					
+				
+			
+			
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |      0: Quit                                                                                                                                                                          |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  Your choice :"); i = scanner.nextInt();
+			Menus.clrscr();
+		}while(i!= 0 );
+		
+		return i;
+	}
 	public static void main(String[] args) throws Exception {
-		User user = SessionManagementTools.getSession().getSessionUser();
-		user.setUserType("admin");
-		UserTools.updateUser(UserTools.getUsers(), user);
-		//System.out.println(editProfile(user));
-		SessionManagementTools.startSession(new SessionManagement((int)Math.random(),user, new Date()+""));
-		UserTools.getUsers().forEach(System.out::println);;
+		System.out.println(listOfUserReclamationMenu(UserTools.getOneUser(12)));
 	}
 }
