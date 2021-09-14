@@ -93,6 +93,9 @@ public class StatistiquesTools {
 				               .size();
 	}
 	public static void main(String[] args) throws IOException {
+		
+		
+		
 	}
 	
 	

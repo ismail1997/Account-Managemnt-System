@@ -20,7 +20,7 @@ public class UserTools {
 	
 	public static final String filePath ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\persons\\persons.txt";
 	public static final String userHistoryFilePath="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\userHistory";
-	
+	public static final String idOfUsers = "C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\idtool\\ids.txt";
 	
 	public static void writeUserToFileAsString(User user) {
 		try {
@@ -28,6 +28,24 @@ public class UserTools {
 		} catch (Exception e) {
 			e.printStackTrace();
 		};
+	}
+	
+	public static void writeIdToFile(User user) {
+		try {
+			Tools.writeStringToFile(user.getId()+"", idOfUsers);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ArrayList<Integer> getIDs(){
+		ArrayList<String> idsAsString = Tools.getDataFromFile(idOfUsers);
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		for(String str : idsAsString) 
+		{
+			ids.add(Integer.parseInt(str));
+		}
+		return ids;
 	}
 	
 	public static ArrayList<String> getUsersFromFile()
@@ -99,7 +117,15 @@ public class UserTools {
 	
 	public static int getMaxID() {
 		User u =getUsers().stream().max(Comparator.comparing(User::getId)).orElseThrow(NoSuchElementException::new);
-		return u.getId();
+		Random random =new Random();
+		int rd = random.nextInt(999 -100+1)+100; 
+		int some = rd + u.getId();
+		while(getIDs().contains(some)) {
+			rd = random.nextInt(999 -100+1)+100; 
+			some = rd+u.getId();
+		}
+		
+		return some;
 	}
 	
 	public static User getUserByEmail(String email) {
@@ -218,12 +244,14 @@ public class UserTools {
 //		System.out.println(deleted);
 //		getUsers().forEach(System.out::println);s
 		
-		File file = new File(filePath);
-		if(file.exists()) {
-			System.out.println("exist");
-		}else {
-			System.out.println("donsn't exist");
-		}
+//		File file = new File(filePath);
+//		if(file.exists()) {
+//			System.out.println("exist");
+//		}else {
+//			System.out.println("donsn't exist");
+//		}
+		
+		System.out.println(getMaxID());
 	}
 	
 	

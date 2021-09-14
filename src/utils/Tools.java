@@ -16,6 +16,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.filechooser.FileSystemView;
+
 import entities.User;
 
 public class Tools {
@@ -131,31 +133,32 @@ public class Tools {
 	
 	
 	public static void main (String []args) throws Exception {
-		//getDataFromFile("/textfiles/persons.txt").forEach(System.out::println);
-		//User user =new User(0, null, null, null, null, null, null, null, null, null);
 		
-		//writeObjectAsStringToFile(user,"src/textfiles/persons.txt");
+		String applicationDirectory     = "ApplicationsDE";
+		  String applicationDataDirectory = "applicationsData";
+		     String javaAppsData             = "javaAppsData";
+		           String AccountManagementSystem  = "AccountManagementSystem";
+		                String accounts                 = "accounts";
+		                       String accountsFile ="accounts.txt";
+		                String historiques              ="historiques";
+		                       String userhistory            ="userHistory";
+		                       String accounthistory         ="accountHistory";
+		                String persons                  ="persons";
+		                String settings                 ="settings";
 		
-		//cleanDataFromFile(AccountTools.filePath);
-		String path ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques";
+		//File dir = new File(applicationDirectory);
+		String documentDirectory =FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+		System.out.println(documentDirectory);
 		
-		File file = new File(path);
-		System.out.println(file);
-		
-		File fileList [] = file.listFiles();
-		for(File f : fileList)
-		{
-			System.out.println("File name :"+f.getName());
-			System.out.println(" ");
+		File file = new File(documentDirectory+"\\"+applicationDirectory);
+		if(file.exists()) {
+			System.out.println(file.getAbsolutePath());
+			System.out.println(file.isDirectory());
+		}else {
+			System.out.println("doesn't exist");
+			//file.createNewFile();
+			System.out.println(file.mkdir());
 		}
 		
-		System.out.println(UserTools.getOneUser(1));
-		UserTools.getUsers().stream().forEach(user->{
-			try {
-				new File(path+"\\"+user.getCodeUser()+".txt").createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
 	}
 }
