@@ -3,38 +3,16 @@ package application;
 
 
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
-
-import entities.Account; 
-import entities.User;
-import sessionManagement.SessionManagement;
 import sessionManagement.SessionManagementTools;
-import utils.AccountTools;
 import utils.AdminAccountMenus;
 import utils.AdminMenus;
 import utils.AdminReclamationMenu;
 import utils.Menus;
 import utils.Tools;
 import utils.UserMenus;
-import utils.UserTools;
 
 public class Application {
 	
-	public static String header=""
-
-			+ "  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\r\n"
-			+ "  |                                                    ______                                                             _                                                               |\r\n"
-			+ "  |           /\\                               _      |  ___ \\                                                 _         | |              _                                               |\r\n"
-			+ "  |          /  \\   ____ ____ ___  _   _ ____ | |_    | | _ | | ____ ____   ____  ____  ____ ____   ____ ____ | |_        \\ \\  _   _  ___| |_  ____ ____                                  |\r\n"
-			+ "  |         / /\\ \\ / ___) ___) _ \\| | | |  _ \\|  _)   | || || |/ _  |  _ \\ / _  |/ _  |/ _  )    \\ / _  )  _ \\|  _)        \\ \\| | | |/___)  _)/ _  )    \\                                 |\r\n"
-			+ "  |        | |__| ( (__( (__| |_| | |_| | | | | |__   | || || ( ( | | | | ( ( | ( ( | ( (/ /| | | ( (/ /| | | | |__    _____) ) |_| |___ | |_( (/ /| | | |                                |\r\n"
-			+ "  |        |______|\\____)____)___/ \\____|_| |_|\\___)  |_||_||_|\\_||_|_| |_|\\_||_|\\_|| |\\____)_|_|_|\\____)_| |_|\\___)  (______/ \\__  (___/ \\___)____)_|_|_|                                |\r\n"
-			+ "  |                                                                             (_____|                                       (____/                                                      |";
 	public static void main(String[] args) throws Exception {
 		
 		Tools.CreateFileIfNoteExist();

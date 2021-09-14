@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileSystemView;
 import entities.User;
 
 public class Tools {
+	public static final  String DirecotryOfDocuments =FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
 	public static void writeObjectAsStringToFile(Object obj, String filepath) throws Exception 
 	{
 		String strToWrite = obj.toString();
@@ -267,9 +268,5 @@ public class Tools {
 		}
 	}
 	
-	public static void main (String []args) throws Exception {
-		CreateFileIfNoteExist();
-		
-		
-	}
+
 }

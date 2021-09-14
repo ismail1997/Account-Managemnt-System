@@ -555,14 +555,7 @@ public class Menus {
 		return i;
 	}
 	
-	
-	
-	
-	public static void main(String[] args) {
-		System.out.println(myAccountHistory(1));
-		//System.out.println(AccountTools.getOneAccountById(13));
-	}
-	
+
 	
 	
 }

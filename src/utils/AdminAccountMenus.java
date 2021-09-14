@@ -212,13 +212,5 @@ public class AdminAccountMenus {
 		
 		return i;
 	}
-	public static void main(String[] args) throws Exception {
-		//System.out.println(ListOfAccount());
-		ArrayList<User> users = UserTools.getUsers();
-		users.forEach(System.out::println);
-//		List<Integer> idOfUsers = users.stream().map(User::getId).collect(Collectors.toList());
-//		System.out.println(idOfUsers);
-		//System.out.println(desactivateAccountMenu());
-		//System.out.println(activateAccountMenu());
-	}
+
 }

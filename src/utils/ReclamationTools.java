@@ -14,7 +14,7 @@ import entities.Reclamation;
 import entities.User;
 
 public class ReclamationTools {
-	private final static String reclamationFilePath ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\reclamation\\reclamations.txt";
+	private final static String reclamationFilePath =Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\reclamation\\reclamations.txt";
 	
 	public  static void writeReclamationToFileAsString(Reclamation reclamation) throws Exception {
 		Tools.writeObjectAsStringToFile(reclamation, reclamationFilePath);
@@ -87,29 +87,7 @@ public class ReclamationTools {
 		for(int i = 0 ; i<reclamations.size();i++) {
 			writeReclamationToFileAsString(reclamations.get(i));
 		}
-		//System.out.println("done updating user");
 	}
 	
-	public static void main(String[] args) throws Exception {
-//		Reclamation reclamation = new Reclamation(1, "How could this be you are not here with me ",LocalDate.now()+"", false,7,"");
-//		Reclamation reclamation1 = new Reclamation(2,"please i wanna deactivate my account",LocalDate.now()+"",false,7,"");
-//		Reclamation reclamation2 = new Reclamation(3,"can not withdraw money from my account",LocalDate.now()+"",false,12,"");
 
-//		writeReclamationToFileAsString(reclamation1);
-//		writeReclamationToFileAsString(reclamation);
-//		writeReclamationToFileAsString(reclamation2);
-//		System.out.println(reclamation);
-		//getAsStringListOfReclamation().forEach(System.out::println);
-		//getReclamations().forEach(System.out::println);
-		//System.out.println(getMaxID());
-		//getReclamationByUser(UserTools.getOneUser(5)).forEach(System.out::println);
-		//System.out.println(getReclamationByID(1));
-//		Reclamation reclamation = getReclamationByID(1);
-//		reclamation.setAnswer("it is because you are an idiot");
-//		updateReclamation(getReclamations(), reclamation);
-		//System.out.println(reclamation);
-		
-		
-	}
-	
 }

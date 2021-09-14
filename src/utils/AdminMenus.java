@@ -170,13 +170,13 @@ public class AdminMenus {
 			UserTools.createHistoriqueForEveryUser(user);
 			
 			Account account = new Account();
-			account.setActive(false);
 			account.setSolde(1000.0);
 			account.setDateOfCreation(LocalDate.now()+"");
 			account.setUserID(user.getId());
 			account.setAccountCode(AccountTools.generateAccountCode());
 			account.setTypeOfAccount("Single Account");
 			account.setId(AccountTools.getMaxID()+1);
+			account.setActive(true);
 			AccountTools.writeAccountToFileAsString(account);
 			AccountTools.createHistoriqueForEveryAccount(account);
 			
@@ -493,10 +493,6 @@ public class AdminMenus {
 		}
 		return i;
 	}
-	
-	public static void main(String[] args) throws Exception {
-		System.out.println(statistiquesMenu());
-		//ReclamationTools.getReclamations().forEach(System.out::println);
-	}
+
 	
 }

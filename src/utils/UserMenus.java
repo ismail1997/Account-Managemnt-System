@@ -337,7 +337,5 @@ public class UserMenus {
 		
 		return i;
 	}
-	public static void main(String[] args) throws Exception {
-		System.out.println(listOfUserReclamationMenu(UserTools.getOneUser(12)));
-	}
+
 }

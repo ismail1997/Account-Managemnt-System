@@ -1,15 +1,13 @@
 package sessionManagement;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import entities.User;
 import utils.Tools;
-import utils.UserTools;
 
 public class SessionManagementTools {
 
-	public static final String filePath ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\sharedPreferences\\session.txt";
+	public static final String filePath =Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\sharedPreferences\\session.txt";
 	private static void writeSessionToFile(SessionManagement session) throws Exception {
 		Tools.writeObjectAsStringToFileWithoutAppend(session, filePath);
 	}
@@ -74,18 +72,6 @@ public class SessionManagementTools {
 		
 		return s;
 	}
-	
-	public static void closeSession() {
-		
-	}
-	
-	public static void main(String[] args) throws Exception {
-//		User user = UserTools.getOneUser(1);
-//		SessionManagement sm = new SessionManagement(1, user, new Date()+"");
-//		startSession(sm);
-		System.out.println(getSession());
-		
-//		
-		//getSession().forEach(System.out::println);
-	}
+
+
 }

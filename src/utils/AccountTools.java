@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 public class AccountTools {
-	public static String filePath ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\accounts\\accounts.txt";
-	private static String accountHistoryFilePath="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\accountHistory";
+	public static String filePath =Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\accounts\\accounts.txt";
+	private static String accountHistoryFilePath=Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\accountHistory";
 
 	
 	public static void writeAccountToFileAsString(Account account) 
@@ -237,7 +237,6 @@ public class AccountTools {
 		if(!historique.exists()) {
 			try {
 				historique.createNewFile();
-				System.out.println("created Successfully");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -288,75 +287,6 @@ public class AccountTools {
 		}
 		return history;
 	}
-	
-	public static void main(String[] args) throws Exception {
-		/*
-		 * 
-		 * private int id;
-	private String accountCode;
-	private String dateOfCreation;
-	private int userID;
-	private double solde;
-	private String typeOfAccount;
-	private boolean active;
-		 * 
-		 * 
-		 */
-//		Account account = new Account(1,generateAccountCode(), LocalDate.now()+"", 1, 12000.0, "Single Account", true);
-//		Account account1 = new Account(2,generateAccountCode(), LocalDate.now()+"", 2, 15000.0, "Single Account", true);
-//		Account account2 = new Account(3,generateAccountCode(), LocalDate.now()+"", 3, 4000.0, "Single Account", true);
-//		Account account3 = new Account(4,generateAccountCode(), LocalDate.now()+"", 4, 125000.0, "Saving Account", false);
-//		Account account4 = new Account(5,generateAccountCode(), LocalDate.now()+"", 5, 100.0, "Common Account", false);
-//		Account account5 = new Account(6,generateAccountCode(), LocalDate.now()+"", 8, 6500.0, "Single Account", true);
-//		Account account6 = new Account(7,generateAccountCode(), LocalDate.now()+"", 7, 2500.0, "Single Account", false);
-//		Account account7 = new Account(8,generateAccountCode(), LocalDate.now()+"", 6, 4520.0, "Single Account", true);
-//		Account account8 = new Account(9,generateAccountCode(), LocalDate.now()+"", 9, 1500.0, "Single Account", false);
-//		Account account9 = new Account(10,generateAccountCode(), LocalDate.now()+"", 1, 520000.0, "Saving Account", true);
-//		
-//		
-//		writeAccountToFileAsString(account);
-//		writeAccountToFileAsString(account1);
-//		writeAccountToFileAsString(account2);
-//		writeAccountToFileAsString(account3);
-//		writeAccountToFileAsString(account4);
-//		writeAccountToFileAsString(account5);
-//		writeAccountToFileAsString(account6);
-//		writeAccountToFileAsString(account7);
-//		writeAccountToFileAsString(account8);
-//		writeAccountToFileAsString(account9);
-//		Account accoun = new Account(getAccounts().get(2).getId(),getAccounts().get(2).getAccountCode(), 
-//				getAccounts().get(2).getDateOfCreation(), getAccounts().get(2).getUserID(), 
-//				45000.0, getAccounts().get(2).getTypeOfAccount(), getAccounts().get(2).isActive());
-		
-		//getAccounts().forEach(System.out::println);
-		//Tools.cleanDataFromFile(filePath);
-		//updateAccount(getAccounts(), accoun);
-//		activateAccount(getOneAccountById(11));
-//		System.out.println(getOneAccountById(11));
-//		
-//		//System.out.println(withdrawMoney(getAccounts(), getOneAccountById(10), 8000));
-//		System.out.println(depositMoney(getAccounts(), getOneAccountById(11), 5000));
-//		System.out.println(getOneAccountById(11));
-//		
-		//getAccounts().forEach(account->createHistoriqueForEveryAccount(account));
-		//getAccountOfUser(2).forEach(System.out::println);
-		//writeHistoryForAccount("Has been credited with amount of 2000 DH", getOneAccountById(10));
-		//getAccounts().forEach(System.out::println);
-		//getAccounts().forEach(System.out::println);;
-		
-		ArrayList<Integer> usersID= new ArrayList<Integer>();
-		
-		ArrayList<User> users = UserTools.getUsers();
-		for(int i = 0 ; i<users.size();i++) {
-			usersID.add(users.get(i).getId());
-		}
-		System.out.println(usersID);
-		
-		List<Account> a =getAccounts().stream().filter(x->!usersID.contains(x.getUserID())).collect(Collectors.toList());
-		//getHistoryOfAccount(getOneAccountById(10)).forEach(x->System.out.println(x));
-		//getHistoryForAllAccounts(getAccountsByUserID(1)).forEach(System.out::println);;
-		a.forEach(System.out::println);
 
-	}
 }
 

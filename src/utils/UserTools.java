@@ -19,9 +19,9 @@ import sessionManagement.SessionManagementTools;
 
 public class UserTools {
 	
-	public static final String filePath ="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\persons\\persons.txt";
-	public static final String userHistoryFilePath="C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\userHistory";
-	public static final String idOfUsers = "C:\\Users\\ismail\\Documents\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\idtool\\ids.txt";
+	public static final String filePath =Tools.DirecotryOfDocuments+"\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\persons\\persons.txt";
+	public static final String userHistoryFilePath="\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\historiques\\userHistory";
+	public static final String idOfUsers = "\\Applications\\applicationsData\\javaAppsData\\AccountManagementSystem\\settings\\idtool\\ids.txt";
 	
 	public static void writeUserToFileAsString(User user) {
 		try {
@@ -220,50 +220,7 @@ public class UserTools {
 		//System.out.println("done updating user");
 		return "deleted successfully";
 	}
-	
-	public static void main(String[] args) throws Exception {
-		
-//		User u = new User(1, "202108311848-0001", "ismail","bouaddi", "+212611298559", "bouaddi1997@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "admin");
-//		User u1 = new User(1+1, "202108311848-0002", "john","lcok", "+212611292339", "john@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "admin");
-//		User u2= new User(1+2, "202108311848-0003", "sara","tankrediy", "+212621298559", "sara1997@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "admin");
-//		User u3 = new User(3+1, "202108311848-0004", "michael","jackson", "+212600198559", "michaelJackson@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "admin");
-//		User u4 = new User(1+4, "202108311848-0005", "bob","marely", "+212611291111", "bobM@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		User u5 = new User(1+5, "202108311848-0006", "lisa","simpson", "+212611234559", "lisa@simpson.ma","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		User u6 = new User(1+6, "202108311848-0007", "arnold","shwarzenger", "+212698568559", "arnold@mail.cm","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		User u7 = new User(1+7, "202108311848-0008", "bart","simpson", "+212611203219", "googleBart@gmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		User u8 = new User(1+8, "202108311848-0009", "magy","ford", "+212611012349", "spenioy@magy.ford","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		User u9 = new User(1+9, "202108311848-0010", "elissa","barel", "+212611292020", "elissa@hotmail.com","1234",LocalDate.now()+"", "Sidi maarouf casablanca", "user");
-//		
-//		String file = "src/textfiles/persons.txt";
-//		Tools.writeObjectAsStringToFile(u, file);
-//		Tools.writeObjectAsStringToFile(u1, file);
-//		Tools.writeObjectAsStringToFile(u2, file);
-//		Tools.writeObjectAsStringToFile(u3, file);
-//		Tools.writeObjectAsStringToFile(u4, file);
-//		Tools.writeObjectAsStringToFile(u5, file);
-//		Tools.writeObjectAsStringToFile(u6, file);
-//		Tools.writeObjectAsStringToFile(u7, file);
-//		Tools.writeObjectAsStringToFile(u8, file);
-//		Tools.writeObjectAsStringToFile(u9, file);
-//
-//		User user = getOneUser(14);
-//		System.out.println(user);
-//		
-//		String deleted =deleteUser(user, getUsers());
-//		System.out.println(deleted);
-//		getUsers().forEach(System.out::println);s
-		
-//		File file = new File(filePath);
-//		if(file.exists()) {
-//			System.out.println("exist");
-//		}else {
-//			System.out.println("donsn't exist");
-//		}
-		
-		//getUsers().forEach(System.out::println);
-		
 
-	}
 	
 	
 	

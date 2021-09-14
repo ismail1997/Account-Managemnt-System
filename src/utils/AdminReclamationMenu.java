@@ -137,7 +137,5 @@ public class AdminReclamationMenu {
 		TimeUnit.MILLISECONDS.sleep(2500);
 		Menus.clrscr();
 	}
-	public static void main(String[] args) throws Exception {
-		System.out.println(answerReclamation() );
-	}
+
 }
