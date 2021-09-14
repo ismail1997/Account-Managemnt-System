@@ -106,6 +106,10 @@ public class AccountTools {
 	
 	public static int getMaxID() 
 	{
+		List<Account> accounts = getAccounts();
+		if(accounts ==null || accounts.isEmpty()) {
+			return 1;
+		}
 		Account account = getAccounts().stream().max(Comparator.comparing(Account::getId)).orElseThrow(NoSuchElementException::new);
 		return account.getId();
 	}

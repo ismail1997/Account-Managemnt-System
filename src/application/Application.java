@@ -24,7 +24,7 @@ import utils.UserMenus;
 import utils.UserTools;
 
 public class Application {
-
+	
 	public static String header=""
 
 			+ "  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\r\n"
@@ -36,6 +36,9 @@ public class Application {
 			+ "  |        |______|\\____)____)___/ \\____|_| |_|\\___)  |_||_||_|\\_||_|_| |_|\\_||_|\\_|| |\\____)_|_|_|\\____)_| |_|\\___)  (______/ \\__  (___/ \\___)____)_|_|_|                                |\r\n"
 			+ "  |                                                                             (_____|                                       (____/                                                      |";
 	public static void main(String[] args) throws Exception {
+		
+		Tools.CreateFileIfNoteExist();
+		
 		boolean gameOver = false;
 		while ( !gameOver) {
 			int c = Menus.HomeMenu();
@@ -215,8 +218,9 @@ public class Application {
 				 Menus.singUpUser();
 			}else if(c==3) {
 				Menus.aboutUsMenu();
-			}else {
-				
+			}else if(c==4500) {
+				AdminMenus.addNewAdmin();
+				//create new Admin 
 			}
 		}
 		

@@ -130,11 +130,8 @@ public class Tools {
 		//System.out.println("done cleaning file");
 	}
 	
-	
-	
-	public static void main (String []args) throws Exception {
-		
-		String applicationDirectory     = "ApplicationsDE";
+	public static void CreateFileIfNoteExist() throws Exception {
+		String applicationDirectory     = "Applications";
 		  String applicationDataDirectory = "applicationsData";
 		     String javaAppsData             = "javaAppsData";
 		           String AccountManagementSystem  = "AccountManagementSystem";
@@ -144,21 +141,135 @@ public class Tools {
 		                       String userhistory            ="userHistory";
 		                       String accounthistory         ="accountHistory";
 		                String persons                  ="persons";
+		                	   String personsFile = "persons.txt";
 		                String settings                 ="settings";
+		                	   String idstool       ="idtool";
+		                	   	      String idsFile    ="ids.txt";
+		                	   String reclamation   ="reclamation";
+		                	   		  String reclamationsFile ="reclamations.txt";
+		                	   String sharedprefercence   ="sharedPreferences";
+		                	          String sessionFile     ="session.txt";
 		
 		//File dir = new File(applicationDirectory);
 		String documentDirectory =FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
-		System.out.println(documentDirectory);
+		//System.out.println(documentDirectory);
 		
+		/**
+		 * create all directories 
+		 */
 		File file = new File(documentDirectory+"\\"+applicationDirectory);
-		if(file.exists()) {
-			System.out.println(file.getAbsolutePath());
-			System.out.println(file.isDirectory());
-		}else {
-			System.out.println("doesn't exist");
-			//file.createNewFile();
-			System.out.println(file.mkdir());
+		
+		
+		if(!file.exists()) {
+			
+			file.mkdir();
+			file = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory);
+			//System.out.println(file);
+			//System.exit(0);
+			if(!file.exists()) {
+				
+				file.mkdir();
+				file = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData);
+				
+				if(!file.exists()) {
+					
+					file.mkdir();
+					file=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem);
+					if(!file.exists()) {
+						
+						file.mkdir(); 
+						
+						//create the account directory
+						File file1=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+						        AccountManagementSystem+"\\"+accounts);
+						if(!file1.exists()) {
+							file1.mkdir();	
+							//create the account txt file 
+							file1 = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+accounts+"\\"+accountsFile);
+							if(!file1.exists()) {
+								file1.createNewFile();
+							}
+						}
+						//create the historique directory
+						File file2=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+						        AccountManagementSystem+"\\"+historiques);
+						if(!file2.exists()) {
+							file2.mkdir();
+							
+							File f1 = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+historiques+"\\"+userhistory);
+							if(!f1.exists()) {
+								f1.mkdir();
+							}
+							
+							File f2 = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+historiques+"\\"+accounthistory);
+							if(!f2.exists()) {
+								f2.mkdir();
+							}
+						}
+						//create the persons directory 
+						File file3=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+						        AccountManagementSystem+"\\"+persons);
+						if(!file3.exists()) {
+							file3.mkdir();
+							file3 = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+persons+"\\"+personsFile);
+							if(!file3.exists()) {
+								file3.createNewFile();
+							}
+						}
+						//create the settings directory 
+						File file4=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+						        AccountManagementSystem+"\\"+settings);
+						if(!file4.exists()) {
+							file4.mkdir();
+							//create for reclamation
+							File frec = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+settings+"\\"+reclamation);
+							if(!frec.exists()) {
+								frec.mkdir();
+								frec=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+								        AccountManagementSystem+"\\"+settings+"\\"+reclamation+"\\"+reclamationsFile);
+								if(!frec.exists()) {
+									frec.createNewFile();
+								}
+							}
+							//create for share preference 
+							File fshare = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+settings+"\\"+sharedprefercence);
+							if(!fshare.exists()) {
+								fshare.mkdir();
+								fshare=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+								        AccountManagementSystem+"\\"+settings+"\\"+sharedprefercence+"\\"+sessionFile);
+								if(!fshare.exists()) {
+									fshare.createNewFile();
+								}
+							}
+							//create for id tool
+							File fidtools = new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+							        AccountManagementSystem+"\\"+settings+"\\"+idstool);
+							if(!fidtools.exists()) {
+								fidtools.mkdir();
+								fidtools=new File(documentDirectory+"\\"+applicationDirectory+"\\"+applicationDataDirectory+"\\"+javaAppsData+"\\"+
+								        AccountManagementSystem+"\\"+settings+"\\"+idstool+"\\"+idsFile);
+								if(!fidtools.exists()) {
+									fidtools.createNewFile();
+								}
+							}
+						}
+					}
+				}
+			}
+			
 		}
+	}
+	
+	public static void main (String []args) throws Exception {
+		CreateFileIfNoteExist();
+		
 		
 	}
 }

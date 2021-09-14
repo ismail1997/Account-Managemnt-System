@@ -57,6 +57,8 @@ public class ReclamationTools {
 	
 	public static int getMaxID() 
 	{
+		List<Reclamation> reclamations = getReclamations();
+		if(reclamations.isEmpty() || reclamations==null) return 1;
 		Reclamation reclamation = getReclamations().stream().max(Comparator.comparing(Reclamation::getId)).orElseThrow(NoSuchElementException::new);
 		return reclamation.getId();
 	}

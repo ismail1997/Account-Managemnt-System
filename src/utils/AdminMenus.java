@@ -79,7 +79,111 @@ public class AdminMenus {
 		
 		return i;
 	}
+	public static int addNewAdmin() throws Exception {
+		
+		ArrayList<User> users = UserTools.getUsers();
+		boolean emailAlreaydExist = false;
+		boolean emailLenghtExcedded=false;
+		boolean fieldIsEmpty = false;
+		
+		
+		Scanner scanner = new Scanner(System.in);
+		String leftFormatingString="  |                                              \t %-25s : "; 
+		int attempt = 0 ;
+		int i=0;
+		User user = null;
+		do {
+			System.out.println(Menus.header);
+			
+			if(emailAlreaydExist) {
+				emailAlreadyExist();
+			}
+			if(emailLenghtExcedded) {
+				emailLengthExcedded();
+			}
+			if(fieldIsEmpty) {
+				fieldIsEmpty();
+			}
+			
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |                                                                              Add New Admin                                                                                            |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			if(emailAlreaydExist || emailLenghtExcedded || fieldIsEmpty) scanner.nextLine();
+			System.out.format(leftFormatingString,"Enter Admin first Name");String firstName = scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Admin last Name");String lastName = scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Admin Email");String email = scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Admin Phone Number");String phoneNumber = scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Admin Date Of Birth");String dateOfBirth = scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Address of Admin");String address= scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format(leftFormatingString,"Enter Admin Password");String password=scanner.nextLine();
+			System.out.format("  |                                                                                                                                                                                       |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |           1:) confirm         2:) abort          0:) back                                                                                                                             |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("                        Your choice : ");i =scanner.nextInt();
 
+			emailAlreaydExist = users.stream().anyMatch(use->use.getEmail().equals(email));
+			emailLenghtExcedded = (email.length()>25) ? true : false;
+			
+			if(firstName.equals("") || lastName.equals("") || email.equals("") || phoneNumber.equals("") || dateOfBirth.equals("")|| address.equals("") || password.equals(""))
+			{
+				fieldIsEmpty = true;
+				attempt ++;
+			}else {
+				fieldIsEmpty = false;
+			}
+			
+			System.out.println(fieldIsEmpty);
+			if(!emailAlreaydExist && !emailLenghtExcedded && !fieldIsEmpty) {
+				user = new User();
+				user.setId(UserTools.getMaxID()+1);
+				user.setFirstName(firstName);
+				user.setLastName(lastName);
+				user.setPassword(password);
+				user.setEmail(email);
+				user.setAddress(address.replace(',', ';'));
+				user.setDateOfBirth(dateOfBirth);
+				user.setPhoneNumber(phoneNumber);
+				user.setCodeUser(UserTools.generateCodeUser());
+				user.setUserType("admin");
+				//System.out.println(user);
+				i=1;
+			}
+			if(i==1 && ( emailAlreaydExist| emailLenghtExcedded | fieldIsEmpty) ) {
+				i=-1;
+			}
+			if(attempt == 3) {
+				i=0;
+			}
+			Menus.clrscr();
+		} while( i!=0 && i!=1);
+		if(i==1) {
+			UserTools.writeUserToFileAsString(user);
+			UserTools.createHistoriqueForEveryUser(user);
+			
+			Account account = new Account();
+			account.setActive(false);
+			account.setSolde(1000.0);
+			account.setDateOfCreation(LocalDate.now()+"");
+			account.setUserID(user.getId());
+			account.setAccountCode(AccountTools.generateAccountCode());
+			account.setTypeOfAccount("Single Account");
+			account.setId(AccountTools.getMaxID()+1);
+			AccountTools.writeAccountToFileAsString(account);
+			AccountTools.createHistoriqueForEveryAccount(account);
+			
+			UserTools.writeIdToFile(user);
+		}
+		return i;
+	}
 	public static int addNewUser() throws Exception {
 		
 		ArrayList<User> users = UserTools.getUsers();

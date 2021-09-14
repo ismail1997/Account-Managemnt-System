@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -116,7 +117,15 @@ public class UserTools {
 	}
 	
 	public static int getMaxID() {
-		User u =getUsers().stream().max(Comparator.comparing(User::getId)).orElseThrow(NoSuchElementException::new);
+		List<User> users = getUsers();
+		User u =null;
+		if(users==null || users.isEmpty()) {
+			u = new User();
+			u.setId(-2);
+		}else {
+			 u =users.stream().max(Comparator.comparing(User::getId)).orElseThrow(NoSuchElementException::new);
+		}
+	
 		Random random =new Random();
 		int rd = random.nextInt(999 -100+1)+100; 
 		int some = rd + u.getId();
