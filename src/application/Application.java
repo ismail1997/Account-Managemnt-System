@@ -106,10 +106,10 @@ public class Application {
 								switch(adminAcc) {
 								case 0:{adminAccountGameOver = true;break;}
 								case 1 : {
-									int withdrawMoneyAdmin = Menus.withDrawMoneyMenu(SessionManagementTools.getSession().getSessionUser());
+									 Menus.withDrawMoneyMenu(SessionManagementTools.getSession().getSessionUser());
 									break;}
 								case 2 : {
-									int depositMoney = Menus.depositMoneyMenu(SessionManagementTools.getSession().getSessionUser());
+									 Menus.depositMoneyMenu(SessionManagementTools.getSession().getSessionUser());
 									break;
 								}
 								default : break;
