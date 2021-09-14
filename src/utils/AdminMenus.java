@@ -79,23 +79,7 @@ public class AdminMenus {
 		
 		return i;
 	}
-	public static int searchUser(User user) {
-		int i = 0;
-		Scanner scanner = new Scanner(System.in);
-		String leftFormatingString="                        |\t %-25s : "; 
-		System.out.println(Menus.header);
-		System.out.format("                        +--------------------------------------------------------------------+%n");
-		System.out.format("                        |                        SEARCH FOR USER                             |%n");
-		System.out.format("                        +--------------------------------------------------------------------+%n");
-		System.out.format("                        |                                                                    |%n");
-		System.out.format(leftFormatingString,"Enter User Email");String email = scanner.nextLine();
-		System.out.format("                        |                                                                    |%n");
-		System.out.format("                        +--------------------------------------------------------------------+%n");
-		System.out.format("                        | 1:) confirm        2:) abort          0:) back                     |%n");
-		System.out.format("                        +--------------------------------------------------------------------+%n");
-		System.out.format("                        Your choice : "); i =scanner.nextInt();
-		return i;
-	}
+
 	public static int addNewUser() throws Exception {
 		
 		ArrayList<User> users = UserTools.getUsers();
@@ -197,6 +181,8 @@ public class AdminMenus {
 			account.setId(AccountTools.getMaxID()+1);
 			AccountTools.writeAccountToFileAsString(account);
 			AccountTools.createHistoriqueForEveryAccount(account);
+			
+			UserTools.writeIdToFile(user);
 		}
 		return i;
 	}

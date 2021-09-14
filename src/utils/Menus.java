@@ -253,7 +253,7 @@ public class Menus {
 				UserTools.createHistoriqueForEveryUser(user);
 				AccountTools.createHistoriqueForEveryAccount(account);
 				AccountTools.writeAccountToFileAsString(account);
-				
+				UserTools.writeIdToFile(user);
 				//System.out.println(user);
 				i=1;
 			}
