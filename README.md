@@ -8,7 +8,8 @@ it is writing with java and the data is saved withing files
 
 ---
 ### Prequisites
- . Java 8 or higher
+Java 8 or higher
+
 ---
 ### Licence & copyright 
 © Ismail Bouaddi, 2021
