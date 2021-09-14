@@ -76,13 +76,24 @@ public class StatistiquesTools {
 				           .sum();
 	}
 	
-	public static void main(String[] args) throws IOException {
-		System.out.println(soldeOfCommonAccounts()+soldeOfSavingAccounts()+soldeOfSingleAccounts());
+	public static int nombreOfReclamations() {
+		return ReclamationTools.getReclamations().size();
 	}
 	
-	/*
-
-			System.out.format(formatOfString,"Total Sold of Simple Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Common Accounts"," accounts");
-	 * */
+	public static int nombreOfAnsweredReclamations() {
+		return ReclamationTools.getReclamations().stream()
+				               .filter(x->x.isAnswered())
+				               .collect(Collectors.toList())
+				               .size();
+	}
+	public static int nombreOfNoneAnsweredReclamations() {
+		return ReclamationTools.getReclamations().stream()
+				               .filter(x->!x.isAnswered())
+				               .collect(Collectors.toList())
+				               .size();
+	}
+	public static void main(String[] args) throws IOException {
+	}
+	
+	
 }

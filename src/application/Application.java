@@ -116,7 +116,7 @@ public class Application {
 							}
 							}
 						}else if(r==5) {
-							//settings 
+								AdminMenus.statistiquesMenu();
 						}else if(r==6) {
 								//history
 							Menus.myHistory(SessionManagementTools.getSession().getSessionUser());

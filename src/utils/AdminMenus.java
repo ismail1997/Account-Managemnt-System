@@ -363,40 +363,50 @@ public class AdminMenus {
 	public static int statistiquesMenu() {
 		Scanner scanner = new Scanner(System.in);
 		int i = -1 ; 
-		String formatOfString = "  | %-35s : %-20s |%n";
+		String formatOfString = "  |                                       %-37s :    %-20s                                                                                 |%n";
 		while(i!=0) {
 			System.out.println(Menus.header);
 			System.out.println("  |                                                                                                                                                                                       |");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
 			System.out.format("  |                                       |                           Statistiques                               |                                                                        |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
-			System.out.format("  |              User Details                                                                                                                                            |%n");
+			System.out.format("  |              User Details                                                                                                                                                             |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
-			System.out.format(formatOfString,"Nombre of Users"," users");
-			System.out.format(formatOfString,"Nombre of Admins"," users");
-			System.out.format(formatOfString,"Nombre of Simple Users"," users");
+			System.out.format(formatOfString,"Nombre of Users",StatistiquesTools.totalOfUsers()+" users");
+			System.out.format(formatOfString,"Nombre of Admins",StatistiquesTools.totalOfAdminUsers()+" admins");
+			System.out.format(formatOfString,"Nombre of Simple Users",StatistiquesTools.totalOfSimpleUsers()+" simple users");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
-			System.out.format("  |              Account Details                                                                                                                                            |%n");
+			System.out.format("  |              Account Details                                                                                                                                                          |%n");
 			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
-			System.out.format(formatOfString,"Nombre of Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Active Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of None Active Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Simple Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Saving Accounts"," accounts");
-			System.out.format(formatOfString,"Nombre of Common Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Active Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of None Active Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Simple Accounts"," accounts");
-			System.out.format(formatOfString,"Total Sold of Common Accounts"," accounts");
+			System.out.format(formatOfString,"Nombre of Accounts",StatistiquesTools.nombreOfAccounts());
+			System.out.format(formatOfString,"Nombre of Active Accounts",StatistiquesTools.nombreOfActiveAccount());
+			System.out.format(formatOfString,"Nombre of None Active Accounts",StatistiquesTools.nombreOfNoneActiveAccounts());
+			System.out.format(formatOfString,"Nombre of Simple Accounts",StatistiquesTools.nombreOfSingleAccount());
+			System.out.format(formatOfString,"Nombre of Saving Accounts",StatistiquesTools.nombreOfSavingAccount());
+			System.out.format(formatOfString,"Nombre of Common Accounts",StatistiquesTools.nombreOfCommonAccount());
+			System.out.format(formatOfString,"Total Sold of Accounts",StatistiquesTools.soldeOffAllAccounts()+" DHs");
+			System.out.format(formatOfString,"Total Sold of Active Accounts",StatistiquesTools.soldeOfActiveAccounts()+" DHs");
+			System.out.format(formatOfString,"Total Sold of None Active Accounts",StatistiquesTools.soldeOfNoneActiveAccounts()+" DHs");
+			System.out.format(formatOfString,"Total Sold of Single Accounts",StatistiquesTools.soldeOfSingleAccounts()+" DHs");
+			System.out.format(formatOfString,"Total Sold of Common Accounts",StatistiquesTools.soldeOfCommonAccounts()+" DHs");
+			System.out.format(formatOfString,"Total Sold of Saving Accounts",StatistiquesTools.soldeOfSavingAccounts()+" DHs");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |              Reclamations Details                                                                                                                                                     |%n");
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format(formatOfString,"Nombre of Reclamations",StatistiquesTools.nombreOfReclamations());
+			System.out.format(formatOfString,"Nombre of Answer Reclamations",StatistiquesTools.nombreOfAnsweredReclamations());
+			System.out.format(formatOfString,"Nombre of None Answered Reclamations",StatistiquesTools.nombreOfNoneAnsweredReclamations());
+			System.out.format("  +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+%n");
+			System.out.format("  |             Type  0 to return :");i = scanner.nextInt();
 			
-			i = scanner.nextInt();
+			Menus.clrscr();
 		}
-		return 2;
+		return i;
 	}
 	
 	public static void main(String[] args) throws Exception {
 		System.out.println(statistiquesMenu());
+		//ReclamationTools.getReclamations().forEach(System.out::println);
 	}
 	
 }
