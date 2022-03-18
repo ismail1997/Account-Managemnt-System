@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data @ToString @AllArgsConstructor @NoArgsConstructor
+@Data @AllArgsConstructor @ToString @NoArgsConstructor
 public class User {
 	
 	private int id;
